@@ -2,12 +2,13 @@
  * https://en.wikipedia.org/wiki/Karatsuba_algorithm
  */
 package main
+
 import (
 	"fmt"
 	"math"
 )
 
-func getDecimalDigits(num int64) uint  {
+func getDecimalDigits(num int64) uint {
 	var result uint
 
 	if num == 0 {
@@ -56,29 +57,29 @@ func karatsuba(x int64, y int64) int64 {
 	}
 
 	if x < 10 || y < 10 {
-		return  x * y
+		return x * y
 	}
 
 	x_digits := getDecimalDigits(x)
 	y_digits := getDecimalDigits(y)
 
 	if x_digits >= y_digits {
-		max_digits = x_digits / 2;
+		max_digits = x_digits / 2
 	} else {
-		max_digits = y_digits / 2;
+		max_digits = y_digits / 2
 	}
 
 	x_high, x_low := getHighAndLowDigits(x, max_digits)
 	y_high, y_low := getHighAndLowDigits(y, max_digits)
 
 	z0 := karatsuba(x_low, y_low)
-	z1 := karatsuba((x_low + x_high),(y_low + y_high))
+	z1 := karatsuba((x_low + x_high), (y_low + y_high))
 	z2 := karatsuba(x_high, y_high)
 
 	if positive {
-		return (z2 * int64(math.Pow(10, float64(2 * max_digits)))) + (z1 - z2 - z0) * int64(math.Pow(10, float64(max_digits))) + z0
+		return (z2 * int64(math.Pow(10, float64(2*max_digits)))) + (z1-z2-z0)*int64(math.Pow(10, float64(max_digits))) + z0
 	} else {
-		return -((z2 * int64(math.Pow(10, float64(2 * max_digits)))) + (z1 - z2 - z0) * int64(math.Pow(10, float64(max_digits))) + z0)
+		return -((z2 * int64(math.Pow(10, float64(2*max_digits)))) + (z1-z2-z0)*int64(math.Pow(10, float64(max_digits))) + z0)
 	}
 
 }

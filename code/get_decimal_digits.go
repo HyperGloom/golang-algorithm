@@ -2,11 +2,12 @@
  * Get the number of digits of an integer.
  */
 package main
+
 import (
 	"fmt"
 )
 
-func getDecimalDigits(num int64) int  {
+func getDecimalDigits(num int64) int {
 	var result int
 
 	if num == 0 {
