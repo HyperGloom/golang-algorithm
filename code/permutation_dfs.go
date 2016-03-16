@@ -11,11 +11,11 @@ func dfs(array []int, book map[int]bool, result []int, step int) {
 	}
 
 	for i := 0; i < len(array); i++ {
-		if !book[array[i]] {
-			book[array[i]] = true
+		if !book[i] {
+			book[i] = true
 			result[step] = array[i]
 			dfs(array, book, result, step+1)
-			book[array[i]] = false
+			book[i] = false
 		}
 	}
 }
