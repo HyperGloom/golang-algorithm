@@ -13,15 +13,15 @@ type node struct {
 	step int
 }
 
-func coordinateIsValid(maze *[5][6]int, c coordinate) bool {
-	if c.x >= 0 && c.x <= 4 && c.y >= 0 && c.y <= 5 && maze[c.x][c.y] == 0 {
+func coordinateIsValid(maze [][]int, c coordinate) bool {
+	if c.x >= 0 && c.x <= len(maze)-1 && c.y >= 0 && c.y <= len(maze[c.x])-1 && maze[c.x][c.y] == 0 {
 		return true
 	} else {
 		return false
 	}
 }
 
-func bfs(maze *[5][6]int, start coordinate, end coordinate) (int, bool) {
+func bfs(maze [][]int, start coordinate, end coordinate) (int, bool) {
 
 	if !coordinateIsValid(maze, start) || !coordinateIsValid(maze, end) {
 		return 0, false
@@ -68,12 +68,12 @@ func bfs(maze *[5][6]int, start coordinate, end coordinate) (int, bool) {
 }
 
 func main() {
-	maze := [5][6]int{
+	maze := [][]int{
 		{0, 0, 1, 0, 0, 1},
 		{0, 1, 0, 1, 0, 0},
 		{0, 0, 1, 0, 0, 0},
 		{1, 0, 0, 1, 0, 1},
 		{0, 0, 0, 0, 0, 1}}
-	step, err := bfs(&maze, coordinate{0, 0}, coordinate{2, 3})
+	step, err := bfs(maze, coordinate{0, 0}, coordinate{2, 3})
 	fmt.Printf("%v:%v\n", err, step)
 }
